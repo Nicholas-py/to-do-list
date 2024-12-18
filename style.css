@@ -2,3 +2,7 @@ body {
     background-color: chocolate;
     text-decoration: wavy;
 }
+
+input {
+    border: red;
+}

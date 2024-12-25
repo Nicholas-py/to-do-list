@@ -1,4 +1,5 @@
+document.getElementById("toptexty").innerText = "hi"
+
 function defaultfunc() {
-    localStorage.setItem("titletext","burrrrrp");
-    document.getElementById("toptext").innerHTML = "Hi";
+    document.getElementById("toptexty").innerText = "beep"
 }

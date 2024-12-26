@@ -3,19 +3,21 @@
 <title>
   To do list
 </title>
-<p id="toptexty"> Please log in: </p>
-<script src="code.js"></script>
-<script> document.getElementById("toptexty").innerText = "hiii"
-</script>
+<p id="toptexty"> Don't see this please </p>
+<script src="code.js" id="code"></script>
+<style src="style.css"></style>
+
 <script>function defaultfunc() {
-  document.getElementById("toptext").innerText = "Hi";
+  document.getElementById("toptexty").innerText = "Hi";
 }</script>
 
 <body> <p></p>
-<input name="Username"> 
+<input id="Username"> 
 <p>
- <input name="Password">
-<button onclick="defaultfunc()">hello</button>
+ <input id="Password">
+
+<button onclick="incodefunc()">hello</button>
+<button onclick="defaultfunc()">not beep</button>
 </p>
 </body>
 </html>

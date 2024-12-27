@@ -1,11 +1,35 @@
+const separator = "@#*&^";
 
 var start, inp;
 
-var oops;
+function isblank(str) {
+    return Boolean(!str.trim());
+}
+
+class ListItem {
+    #name;
+    #duedate = "never";
+    #category = "";
+    constructor (name, duedate, category) {
+        this.#name = name;
+        if (!isblank(duedate)) {
+            this.#duedate = duedate
+        }
+        if (!isblank(duedate)) {
+            this.#category = category
+        }
+    }
+    get stringdata () {
+        var str = this.#name;
+        str += separator + this.#duedate;
+        str += separator + this.#category;
+        return str;
+    }
+}
+
 function setup() {
     start = document.getElementById("toptexty");
     inp = document.getElementById("first");
-    oops = [1,2,3,4];
     start.innerText = localStorage.getItem("Header");
 }
 

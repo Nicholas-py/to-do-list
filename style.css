@@ -6,3 +6,13 @@ body {
 input {
     color: grey;
 }
+
+table {
+    border: 1px;
+}
+tr {
+    border: 1pt
+}
+th {
+    border: 1pc;
+}

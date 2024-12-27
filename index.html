@@ -10,12 +10,31 @@
 
 <header> Todolist </header>
 <p id="toptexty"></p>
-<input id="first" value="hi">
+<p id="debug"></p>
+<input id="test" value="hi">
 <body> 
 <button onclick="incodefunc()">hello</button>
-<div id = "row">
-<p><input id="first"><input id = "second"><input id="third">
-</div>
+<table>
+  <tr id="headers">
+    <th>NAME</th>
+    <th>DUE DATE</th>
+    <th>Categories</th>
+  </tr>
+  <tr id = "inputrow">
+    <th><input id="first"></th>
+    <th><input id = "second"></th>
+    <th><input id="third"></th>
+    <th><button onclick="submit()">✅</button></th>
+  </tr>
+
+  <tr id = "saved">
+    <th>Task name</th>
+    <th>currentdate</th>
+    <th>no category</th>
+    <th><button onclick="edit()">✏️</button></th>
+
+  </tr>
+</table> 
 <script>setup()</script>
 </body>
 </html>

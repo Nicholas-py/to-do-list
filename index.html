@@ -4,6 +4,7 @@
   To do list
 </title>
 <script src="code.js"></script>
+<script src="saving.js"></script>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="Notepad_clipart.png">
 
@@ -14,7 +15,7 @@
 <input id="test" value="hi">
 <body> 
 <button onclick="incodefunc()">hello</button>
-<table>
+<table id="table">
   <tr id="headers">
     <th>NAME</th>
     <th>DUE DATE</th>
@@ -24,7 +25,7 @@
     <th><input id="first"></th>
     <th><input id = "second"></th>
     <th><input id="third"></th>
-    <th><button onclick="submit()">✅</button></th>
+    <th><button onclick="submit(this.parentElement.parentElement)">✅</button></th>
   </tr>
 
   <tr id = "saved">
@@ -35,6 +36,7 @@
 
   </tr>
 </table> 
+<button onclick="newrow()">+</button>
 <script>setup()</script>
 </body>
 </html>

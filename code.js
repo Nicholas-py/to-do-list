@@ -1,8 +1,66 @@
 const separator = "@#*&^";
+const pageitems = [];
 
 var start, inp, debug;
 
-const pageitems = [];
+var inputrow, savedrow, table;
+
+localStorage.setItem("item1", "exist@#*&^jan 6, 2025@#*&^test")
+
+function edit() {
+
+}
+
+function newrow() {
+    var neww = inputrow.cloneNode(true);
+    neww.id = "inputrow"+table.rows.length.toString();
+    start.innerText = neww.innerHTML;
+    table.appendChild(neww);
+}
+
+function submit(row) {
+    row.remove();
+    var itemstring = row.cells[0].firstElementChild.value+separator+row.cells[1].firstElementChild.value+separator+row.cells[2].firstElementChild.value
+    setsavedrow(itemstring); 
+    pageitems[pageitems.length] = ListItem.fromstring(itemstring)
+    save();
+
+}
+
+function setsavedrow(string) {
+    var neww = savedrow.cloneNode(true);
+    var values = string.split(separator);
+    for (let i = 0; i < values.length; i++){
+        neww.cells[i].innerHTML = values[i]}
+    table.appendChild(neww);
+
+}
+
+function currenttime() {
+    return Date(Date.now());
+}
+
+function setup() {
+    start = document.getElementById("toptexty");
+    inp = document.getElementById("test");
+    debug = document.getElementById("debug");
+    inputrow = document.getElementById("inputrow");
+    savedrow = document.getElementById("saved");
+    table = document.getElementById("table");
+    start.innerText = localStorage.getItem("Header");
+    inputrow.remove();
+    savedrow.remove();
+}
+
+function incodefunc() {
+    start.innerText = inp.value;
+    localStorage.setItem("Header",inp.value);
+}
+
+
+
+
+
 
 function isblank(str) {
     return Boolean(!str.trim());
@@ -30,7 +88,7 @@ class ListItem {
 
     static fromstring(string) {
         var items = string.split(separator);
-        return ListItem(items[0],items[1],items[2])
+        return new ListItem(items[0],items[1],items[2])
     }
 }
 
@@ -51,24 +109,4 @@ function load() {
         pageitems[counter] = ListItem.fromstring(item);
         counter++;
     }
-}
-
-function edit() {
-
-}
-
-function currenttime() {
-    return Date(Date.now());
-}
-
-function setup() {
-    start = document.getElementById("toptexty");
-    inp = document.getElementById("test");
-    debug = document.getElementById("debug")
-    start.innerText = localStorage.getItem("Header");
-}
-
-function incodefunc() {
-    start.innerText = inp.value;
-    localStorage.setItem("Header",inp.value);
 }

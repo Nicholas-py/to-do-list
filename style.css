@@ -9,6 +9,8 @@ input {
 
 table {
     border: 1px;
+    font-family: 'Times New Roman', Times, serif;
+    width: 50%;
 }
 tr {
     border: 1pt

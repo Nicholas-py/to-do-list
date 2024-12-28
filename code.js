@@ -16,7 +16,6 @@ function edit(row) {
 function newrow() {
     var neww = inputrow.cloneNode(true);
     neww.id = "inputrow"+table.rows.length.toString();
-    debug.innerText = neww.innerHTML;
     table.appendChild(neww);
 }
 
@@ -25,14 +24,12 @@ function submit(row) {
     var obj = ListItem.fromstring(itemstring);
     setsavedrow(obj); 
     pageitems[pageitems.length] = obj;
-    debug.innerHTML = pageitems;
     row.remove();
     save();
 
 }
 
 function setinputrow(number) {
-    debug.innerHTML = "editing"+number;
     var obj = pageitems[number];
     var values = obj.stringdata.split(separator);
     var neww = inputrow.cloneNode(true);
@@ -68,11 +65,6 @@ function setup() {
     inputrow.remove();
     savedrow.remove();
     load();
-}
-
-function incodefunc() {
-    debug.innerText = inp.value;
-    localStorage.setItem("Header",inp.value);
 }
 
 

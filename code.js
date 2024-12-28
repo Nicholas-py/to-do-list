@@ -5,10 +5,12 @@ var start, inp, debug;
 
 var inputrow, savedrow, table;
 
-localStorage.setItem("item1", "exist@#*&^jan 6, 2025@#*&^test")
 
-function edit() {
-
+function edit(row) {
+    var number = row.rowIndex-1;
+    row.remove();
+    setinputrow(number)
+    pageitems.splice(number,1);
 }
 
 function newrow() {
@@ -19,16 +21,31 @@ function newrow() {
 }
 
 function submit(row) {
-    row.remove();
     var itemstring = row.cells[0].firstElementChild.value+separator+row.cells[1].firstElementChild.value+separator+row.cells[2].firstElementChild.value
-    setsavedrow(itemstring); 
-    pageitems[pageitems.length] = ListItem.fromstring(itemstring)
+    var obj = ListItem.fromstring(itemstring);
+    setsavedrow(obj); 
+    pageitems[pageitems.length] = obj;
+    start.innerHTML = pageitems;
+    row.remove();
     save();
 
 }
 
-function setsavedrow(string) {
+function setinputrow(number) {
+    start.innerHTML = "editing"+number;
+    var obj = pageitems[number];
+    var values = obj.stringdata.split(separator);
+    var neww = inputrow.cloneNode(true);
+    for (let i = 0; i < values.length; i++) {
+        neww.cells[i].firstElementChild.value = values[i];
+    }
+    table.appendChild(neww);
+}
+
+function setsavedrow(obj) {
+    var string = obj.stringdata;
     var neww = savedrow.cloneNode(true);
+    neww.id = "savedrow"+pageitems.length.toString();
     var values = string.split(separator);
     for (let i = 0; i < values.length; i++){
         neww.cells[i].innerHTML = values[i]}

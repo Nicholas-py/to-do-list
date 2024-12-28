@@ -1,7 +1,7 @@
 const separator = "@#*&^";
 const pageitems = [];
 
-var start, inp, debug;
+var inp, debug;
 
 var inputrow, savedrow, table;
 
@@ -55,13 +55,11 @@ function currenttime() {
 }
 
 function setup() {
-    start = document.getElementById("toptexty");
     inp = document.getElementById("test");
     debug = document.getElementById("debug");
     inputrow = document.getElementById("inputrow");
     savedrow = document.getElementById("saved");
     table = document.getElementById("table");
-    start.innerText = localStorage.getItem("Header");
     inputrow.remove();
     savedrow.remove();
     load();

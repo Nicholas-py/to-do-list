@@ -23,6 +23,8 @@
     <th><input id = "second"></th>
     <th><input id="third"></th>
     <th><button onclick="submit(this.parentElement.parentElement)">✅</button></th>
+    <th><button onclick="cancel(this.parentElement.parentElement)">❌</button> </th>
+
   </tr>
 
   <tr id = "saved">
@@ -30,10 +32,10 @@
     <th>currentdate</th>
     <th>no category</th>
     <th><button onclick="edit(this.parentElement.parentElement)">✏️</button></th>
-
+    <th><button onclick="trash(this.parentElement.parentElement)">🗑️</button> </th>
   </tr>
 </table> 
-<button onclick="newrow()">+</button>
+<button onclick="newrow()">➕</button>
 <script>setup()</script>
 </body>
 </html>

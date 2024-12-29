@@ -9,8 +9,19 @@ var inputrow, savedrow, table;
 function edit(row) {
     var number = row.rowIndex-1;
     row.remove();
-    setinputrow(number)
+    setinputrow(pageitems[number]);
     pageitems.splice(number,1);
+}
+
+function trash(row) {
+    var number = row.rowIndex-1;
+    row.remove();
+    pageitems.splice(number,1);
+    save();
+}
+
+function cancel(row) {
+    row.remove();
 }
 
 function newrow() {
@@ -29,8 +40,7 @@ function submit(row) {
 
 }
 
-function setinputrow(number) {
-    var obj = pageitems[number];
+function setinputrow(obj) {
     var values = obj.stringdata.split(separator);
     var neww = inputrow.cloneNode(true);
     for (let i = 0; i < values.length; i++) {
@@ -63,6 +73,7 @@ function setup() {
     inputrow.remove();
     savedrow.remove();
     load();
+    updatetable();
 }
 
 
@@ -115,7 +126,12 @@ function load() {
             return;
         }
         pageitems[counter] = ListItem.fromstring(item);
-        setsavedrow(pageitems[counter]);
         counter++;
     }
+}
+
+function updatetable() {
+    pageitems.forEach(element => {setsavedrow(element)
+        
+    });
 }

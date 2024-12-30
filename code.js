@@ -1,5 +1,7 @@
 const separator = "@#*&^";
 const pageitems = [];
+const values = 3;
+var flippers = [1,1,1];
 
 var inp, debug;
 
@@ -28,6 +30,31 @@ function newrow() {
     var neww = inputrow.cloneNode(true);
     neww.id = "inputrow"+table.rows.length.toString();
     table.appendChild(neww);
+}
+
+function sort(func, index) {
+    cleartable();
+    pageitems.sort(func);
+    createtable();
+    save();
+
+    direction = flippers[index];
+    flippers = [1,1,1];
+    flippers[index] = -direction;
+
+    resetarrows();
+}
+
+function resetarrows() {
+    var a0 = document.getElementById("tarrow0");
+    var a1 = document.getElementById("tarrow1");
+    a0.innerHTML = ['▲','▼',][(flippers[0]+1)/2]
+    a1.innerHTML = ['▲','▼',][(flippers[1]+1)/2]
+
+}
+
+function fliparrow(item) {
+    item.innerHTML = ['▲','▼',][['▼','▲'].indexOf(item.innerHTML)]
 }
 
 function submit(row) {
@@ -73,10 +100,9 @@ function setup() {
     inputrow.remove();
     savedrow.remove();
     load();
-    updatetable();
+    createtable();
+    debug.innerHTML = ListItem.sortbyname(pageitems[0],pageitems[1])
 }
-
-
 
 
 
@@ -92,10 +118,10 @@ class ListItem {
     constructor (name, duedate, category) {
         this.#name = name;
         if (!isblank(duedate)) {
-            this.#duedate = duedate
+            this.#duedate = duedate;
         }
         if (!isblank(duedate)) {
-            this.#category = category
+            this.#category = category;
         }
     }
     get stringdata () {
@@ -107,8 +133,28 @@ class ListItem {
 
     static fromstring(string) {
         var items = string.split(separator);
-        return new ListItem(items[0],items[1],items[2])
+        return new ListItem(items[0],items[1],items[2]);
     }
+    static sortbyname(a,b) {
+        if (a.#name.toLowerCase == b.#name.toLowerCase()){
+            return 0;
+        }
+        if (a.#name.toLowerCase() < b.#name.toLowerCase()) {
+            return -flippers[0];
+        }
+        return flippers[0];
+    }
+
+    static sortbydate(a,b) {
+        if (a.#duedate.toLowerCase == b.#duedate.toLowerCase()){
+            return 0;
+        }
+        if (a.#duedate.toLowerCase() < b.#duedate.toLowerCase()) {
+            return -flippers[1];
+        }
+        return flippers[1];
+    }
+    
 }
 
 function save() {
@@ -130,7 +176,15 @@ function load() {
     }
 }
 
-function updatetable() {
+function cleartable() {
+    var first = table.firstElementChild;
+    while (table.firstElementChild) {
+        table.firstElementChild.remove();
+    }
+    table.appendChild(first);
+}
+
+function createtable() {
     pageitems.forEach(element => {setsavedrow(element)
         
     });

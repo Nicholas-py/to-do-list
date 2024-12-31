@@ -10,11 +10,20 @@ input {
 table {
     border: 1px;
     font-family: 'Times New Roman', Times, serif;
-    width: 50%;
 }
 tr {
-    border: 1pt
+    border: 1pt;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
 }
 th {
     border: 1pc;
+    padding-left: 10px;
+    padding-right: 10px;
+
+
+}
+tr.headers {
+    font-family: 'Times New Roman', Times, serif;
+    font-size:x-large;
 }

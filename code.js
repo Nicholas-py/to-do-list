@@ -28,7 +28,6 @@ function cancel(row) {
 
 function newrow() {
     var neww = inputrow.cloneNode(true);
-    neww.id = "inputrow"+table.rows.length.toString();
     table.appendChild(neww);
 }
 
@@ -79,7 +78,6 @@ function setinputrow(obj) {
 function setsavedrow(obj) {
     var string = obj.stringdata;
     var neww = savedrow.cloneNode(true);
-    neww.id = "savedrow"+pageitems.length.toString();
     var values = string.split(separator);
     for (let i = 0; i < values.length; i++){
         neww.cells[i].innerHTML = values[i]}
@@ -120,7 +118,7 @@ class ListItem {
         if (!isblank(duedate)) {
             this.#duedate = duedate;
         }
-        if (!isblank(duedate)) {
+        if (!isblank(category)) {
             this.#category = category;
         }
     }
@@ -136,25 +134,35 @@ class ListItem {
         return new ListItem(items[0],items[1],items[2]);
     }
     static sortbyname(a,b) {
-        if (a.#name.toLowerCase == b.#name.toLowerCase()){
-            return 0;
-        }
-        if (a.#name.toLowerCase() < b.#name.toLowerCase()) {
-            return -flippers[0];
-        }
-        return flippers[0];
+        return sortby(a.#name, b.#name, flippers[0])
     }
 
     static sortbydate(a,b) {
-        if (a.#duedate.toLowerCase == b.#duedate.toLowerCase()){
-            return 0;
-        }
-        if (a.#duedate.toLowerCase() < b.#duedate.toLowerCase()) {
-            return -flippers[1];
-        }
-        return flippers[1];
+        return sortby(a.#duedate, b.#duedate, flippers[1])
+    }
+
+    static sortbycategory(a,b) {
+        return sortby(a.#category, b.#category, flippers[2])
     }
     
+}
+
+function sortby(s1,s2,reverse) {
+    var clean1 = s1.trim().toLowerCase();
+    var clean2 = s2.trim().toLowerCase();
+    if (clean1 == clean2) {
+        return 0;
+    }
+    if (isblank(clean1)) {
+        return reverse;
+    }
+    if (isblank(clean2)) {
+        return -reverse;
+    }
+    if (clean1 > clean2) {
+        return reverse;
+    }
+    return -reverse;
 }
 
 function save() {

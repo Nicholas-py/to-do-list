@@ -1,4 +1,5 @@
 const separator = "@#*&^";
+const never = "No due date"
 const pageitems = [];
 const values = 3;
 var flippers = [1,1,1];
@@ -111,12 +112,13 @@ function isblank(str) {
 
 class ListItem {
     #name;
-    #duedate = "never";
+    #duedate = never;
     #category = "";
     constructor (name, duedate, category) {
         this.#name = name;
-        if (!isblank(duedate)) {
-            this.#duedate = duedate;
+        if (!isblank(duedate) && duedate != never) {
+            this.#duedate = new Date(duedate);
+            debug = this.#duedate.getDay();
         }
         if (!isblank(category)) {
             this.#category = category;
@@ -124,7 +126,12 @@ class ListItem {
     }
     get stringdata () {
         var str = this.#name;
-        str += separator + this.#duedate;
+        if (this.#duedate != never) {
+            str += separator + this.#duedate.toUTCString().substring(0,16);
+        }
+        else {
+            str += separator + never;
+        }
         str += separator + this.#category;
         return str;
     }
@@ -138,7 +145,17 @@ class ListItem {
     }
 
     static sortbydate(a,b) {
-        return sortby(a.#duedate, b.#duedate, flippers[1])
+        if (a.#duedate == b.#duedate) {
+            return 0;
+        }
+        if (a.#duedate == 'never'){
+            return flippers[1];
+        }
+        if (b.#duedate == 'never') {
+            return -flippers[1];
+        }
+        return flippers[1] * (a.#duedate-b.#duedate);
+        
     }
 
     static sortbycategory(a,b) {

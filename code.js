@@ -148,10 +148,10 @@ class ListItem {
         if (a.#duedate == b.#duedate) {
             return 0;
         }
-        if (a.#duedate == 'never'){
+        if (a.#duedate == never){
             return flippers[1];
         }
-        if (b.#duedate == 'never') {
+        if (b.#duedate == never) {
             return -flippers[1];
         }
         return flippers[1] * (a.#duedate-b.#duedate);
